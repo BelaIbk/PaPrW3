@@ -7,9 +7,11 @@
 
 double montecarlo(size_t n) {
     size_t sum = 0;
+    unsigned int seed = time(NULL);
+    
     for (size_t i = 0; i < n; i++) {
-        double x = rand() / (double) RAND_MAX;
-        double y = rand() / (double) RAND_MAX;
+        double x = rand_r(&seed) / (double) RAND_MAX;
+        double y = rand_r(&seed) / (double) RAND_MAX;
         sum+= (x * x + y * y <= 1);
     }
     return 4 * sum / (double) n;
