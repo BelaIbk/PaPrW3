@@ -7,14 +7,19 @@
 
 double montecarlo(size_t n) {
 
-    unsigned int seed = omp_get_thread_num();
+    
     size_t sum = 0;
 
-    #pragma omp parallel for reduction (+:sum)
-    for (size_t i = 0; i < n; i++) {
-        double x = rand_r(&seed) / (double) RAND_MAX;
-        double y = rand_r(&seed) / (double) RAND_MAX;
-        sum+= (x * x + y * y <= 1);
+    #pragma omp parallel
+    {
+        unsigned int seed = omp_get_thread_num();
+
+        #pragma omp for reduction (+: sum)
+        for (size_t i = 0; i < n; i++) {
+            double x = rand_r(&seed) / (double) RAND_MAX;
+            double y = rand_r(&seed) / (double) RAND_MAX;
+            sum+= (x * x + y * y <= 1);
+        }
     }
 
     return 4 * sum / (double) n;

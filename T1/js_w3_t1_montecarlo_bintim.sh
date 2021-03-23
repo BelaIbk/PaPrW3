@@ -25,17 +25,14 @@ module load gcc/8.2.0
 # Set up any environment variables
 #export ENVIRONMENT_VARIABLE=foobar
 
-FILE="./times.csv"
-echo "Threads,Critical (s),Atomic (s),Reduction (s)" > $FILE
 
 for THR in 1 2 4 8
 do
-  LINE=$THR
-  for PROG in "critical" "atomic" "reduction"
-  do
-    OUT=$(OMP_NUM_THREADS=$THR ./montecarlo_$PROG)
-    LINE=$LINE","$(echo $OUT | cut -c1-5)
-  done
-  echo $LINE >> $FILE
+    echo "\tThreads $THR"
+    echo "Critical:"
+    /usr/bin/time -v ./montecarlo_critical $THR
+    echo "Atomic:"
+    /usr/bin/time -v ./montecarlo_atomic $THR
+    echo "Reduction:"
+    /usr/bin/time -v ./montecarlo_reduction $THR
 done
-
