@@ -32,11 +32,11 @@ for THR in 1 2 4 8
 do
     echo "\tThreads $THR"
     echo "Critical:"
-    ./montecarlo_critical $THR
+    OMP_NUM_THREADS=$THR ./montecarlo_critical
     echo "Atomic:"
-    ./montecarlo_atomic $THR
+    OMP_NUM_THREADS=$THR ./montecarlo_atomic
     echo "Reduction:"
-    ./montecarlo_reduction $THR
+    OMP_NUM_THREADS=$THR ./montecarlo_reduction
 done
 echo "Benchmark done."
 
