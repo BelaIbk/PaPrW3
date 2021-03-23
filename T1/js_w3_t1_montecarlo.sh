@@ -8,7 +8,7 @@
 
 # Name of your job. Unless you use the -o and -e options, output will
 # go to a unique file name.ojob_id for each job.
-#$ -N pa_po_w2_t3
+#$ -N PaPr_W3_T1
 
 # Redirect output stream to this file.
 #$ -o output.dat
@@ -30,7 +30,7 @@ echo "Running benchmarks"
 echo "Parallel version:"
 for THR in 1 2 4 8
 do
-    echo "\tThreads $THR"
+    echo "Threads $THR"
     echo "Critical:"
     OMP_NUM_THREADS=$THR ./montecarlo_critical
     echo "Atomic:"
