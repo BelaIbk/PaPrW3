@@ -31,8 +31,8 @@ int main() {
     size_t num_threads = omp_get_max_threads();
 
     double startTime = omp_get_wtime();
-
     double result = montecarlo(N, num_threads);
     double endTime = omp_get_wtime();
+    
 	printf("%2.3fs (N=%d, Result=%f)\n", endTime-startTime, N, result);
 }
