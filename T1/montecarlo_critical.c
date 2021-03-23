@@ -35,5 +35,4 @@ int main() {
     double result = montecarlo(N, num_threads);
     double endTime = omp_get_wtime();
 	printf("%2.3fs (N=%d, Result=%f)\n", endTime-startTime, N, result);
-
 }
