@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 		res += local_res[l];
 	}
 	double end_time = omp_get_wtime();
-	printf("res: %lu, time: %2.2f seconds\n", res, end_time - start_time);
+	printf("%2.2f seconds res: %lu\n", end_time - start_time, res);
 
 	// cleanup
 	free(local_res);
