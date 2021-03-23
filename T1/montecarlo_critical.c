@@ -20,4 +20,5 @@ int main() {
     double result = montecarlo(N);
     double endTime = omp_get_wtime();
 	printf("%2.3fs (N=%d, Result=%f)\n", endTime-startTime, N, result);
+    
 }
