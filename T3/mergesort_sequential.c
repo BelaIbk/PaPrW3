@@ -20,8 +20,8 @@ void merge(int32_t arr[], uint l, uint m, uint r) {
     uint n2 = r - m;
  
     // Temp arrays
-    int32_t *L = malloc(n1 * sizeof())
-    , R[n2];
+    int32_t *L = malloc(n1 * sizeof(int32_t));
+    int32_t *R = malloc(n2 * sizeof(int32_t));
     for (uint i = 0; i < n1; i++)
         L[i] = arr[l + i];
     for (uint j = 0; j < n2; j++)
@@ -58,6 +58,9 @@ void merge(int32_t arr[], uint l, uint m, uint r) {
         j++;
         k++;
     }
+
+    free(L);
+    free(R);
 }
 
 // l:left index, r:right index
