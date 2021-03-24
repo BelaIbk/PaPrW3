@@ -68,8 +68,8 @@ int main(int argc, char **argv) {
 	srand(7);
 	for (long i = 0; i < n; ++i) {
 		for (long j = 0; j < n; ++j) {
-			a[i][j] = 1;
-			b[i][j] = 1;
+			a[i][j] = rand();
+			b[i][j] = rand();
 		}
 	}
 
