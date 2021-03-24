@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 		}
 
 		// sum of matrix c
-#pragma omp parallel for default(none) shared(n, a, b, c, local_res)
+#pragma omp for
 		for (long i = 0; i < n; ++i) {
 			for (long j = 0; j < n; ++j) {
 				local_res[omp_get_thread_num()] += c[i][j];
