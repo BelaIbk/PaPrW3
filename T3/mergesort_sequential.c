@@ -91,7 +91,6 @@ void fillArray(int32_t arr[], uint size, uint mod) {
     }
 }
 
-
 int main() {
     int32_t *array = (int32_t *) malloc(N * sizeof(int32_t));
 
