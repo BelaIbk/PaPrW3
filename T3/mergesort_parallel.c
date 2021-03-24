@@ -7,7 +7,7 @@
 typedef unsigned int uint;
 
 //#define N 100000000
-  #define N 100
+  #define N 10000000
 //#define N 1000
 
 //----------------------------------
@@ -70,7 +70,7 @@ void mergeSort(int32_t arr[], uint l, uint r)
     if (l < r) {
         uint m = l + (r - l) / 2;
 
-#pragma omp parallel sections num_threads(2)
+#pragma omp parallel sections
         {
 #pragma omp section 
             {
@@ -101,6 +101,33 @@ void fillArray(int32_t arr[], uint size, uint mod) {
     }
 }
 
+void sortCheck(int32_t arr[], uint size) {
+    for (uint i = 1; i < size; i++) {
+        if (arr[i-1] > arr[i]) {
+            fprintf(stderr, "array is not sorted!");
+            free(arr);
+            exit(1);
+        }
+    }
+}
+
+
+void testMergesort() {
+    int32_t a1[] = {9,0,1,3,6,2,8,4,5,1};
+    int32_t *a2 = (int32_t *) malloc(10 * sizeof(int32_t));
+
+    fillArray(a2, 10, 10);
+
+    mergeSort(a1, 0, 9);
+    mergeSort(a2, 0, 9);
+
+    sortCheck(a1, 10);
+    sortCheck(a2, 10);
+
+    free(a2);
+}
+
+
 int main() {
     int32_t *array = (int32_t *) malloc(N * sizeof(int32_t));
 
@@ -110,7 +137,7 @@ int main() {
     mergeSort(array, 0, N-1);
     double endTime = omp_get_wtime();
 
-    printArray(array, N);
+    testMergesort();
 
     printf("%2.3fs\n", endTime-startTime);
 
