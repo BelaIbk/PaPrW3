@@ -6,8 +6,9 @@
 
 typedef unsigned int uint;
 
-#define N 10
 //#define N 100000000
+  #define N 10000000
+//#define N 1000
 
 //----------------------------------
 // Merge sort functions from 
@@ -122,13 +123,9 @@ int main() {
 
     fillArray(array, N, 1000);
 
-    printArray(array, N);
-
     double startTime = omp_get_wtime();
     mergeSort(array, 0, N-1);
     double endTime = omp_get_wtime();
-
-    printArray(array, N);
 
     printf("%2.3fs\n", endTime-startTime);
 
