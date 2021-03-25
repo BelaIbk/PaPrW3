@@ -7,7 +7,7 @@
 typedef unsigned int uint;
 
 //#define N 100000000
-  #define N 10000000
+  #define N 100
 
 #define TASK_SIZE 100
 
@@ -70,20 +70,20 @@ void mergeSort(int32_t *arr, uint l, uint r)
     if (l < r) {
         uint m = l + (r - l) / 2;
 
-#pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
+        // See also https://stackoverflow.com/questions/13811114/parallel-merge-sort-in-openmp
+        #pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
         mergeSort(arr, l, m);
 
-#pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
+        #pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
         mergeSort(arr, m + 1, r);
 
-#pragma omp taskwait
+        #pragma omp taskwait
         merge(arr, l, m, r);
     }
 }
 
 void printArray(int32_t arr[], uint size) {
-    uint i;
-    for (i = 0; i < size; i++)
+    for (uint i = 0; i < size; i++)
         printf("%d ", arr[i]);
     printf("\n");
 }
@@ -124,15 +124,16 @@ void testMergesort() {
 
 
 int main() {
+    srand(42);
     int32_t *array = (int32_t *) malloc(N * sizeof(int32_t));
 
     fillArray(array, N, 1000);
 
     double startTime = omp_get_wtime();
 
-#pragma omp parallel
+    #pragma omp parallel
     {
-#pragma omp single
+        #pragma omp single
         mergeSort(array, 0, N-1);
     }
 
@@ -142,6 +143,8 @@ int main() {
     testMergesort();
 
     printf("%2.3fs\n", endTime-startTime);
+
+    printArray(array, N);
 
     free(array);
 
