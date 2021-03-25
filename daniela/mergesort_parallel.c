@@ -6,7 +6,7 @@
 
 typedef unsigned int uint;
 
-#define N 1000
+#define N 1000000
 //#define N 100000000
 
 //-------------------------------------------------------------------------------
@@ -153,15 +153,18 @@ int main() {
 
     //printArray(array, N);
 
+    omp_set_nested(1);
+    //omp_set_num_threads(2);
+
     uint num_threads = omp_get_max_threads();
 
-    printf("num_threads: %d\\", num_threads);
+    printf("num_threads: %d\n", num_threads);
 
     double startTime = omp_get_wtime();
     mergeSort_parallel(array, 0, N-1, num_threads);
     double endTime = omp_get_wtime();
     printf("%2.3fs\n", endTime-startTime);
 
-    printArray(array, N);
+    //printArray(array, N);
     free(array);
 }

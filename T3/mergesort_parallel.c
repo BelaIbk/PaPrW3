@@ -8,12 +8,12 @@ typedef unsigned int uint;
 
 //#define N 100000000
   #define N 10000000
-//#define N 1000
+
+#define TASK_SIZE 100
 
 //----------------------------------
 // Merge sort functions from 
 // https://www.geeksforgeeks.org/merge-sort/
-
 
 // l: left, m: middle, r:right
 void merge(int32_t arr[], uint l, uint m, uint r) {
@@ -65,23 +65,18 @@ void merge(int32_t arr[], uint l, uint m, uint r) {
 }
 
 // l:left index, r:right index
-void mergeSort(int32_t arr[], uint l, uint r)
+void mergeSort(int32_t *arr, uint l, uint r)
 {
     if (l < r) {
         uint m = l + (r - l) / 2;
 
-#pragma omp parallel sections
-        {
-#pragma omp section 
-            {
-                mergeSort(arr, l, m);
-            }
-#pragma omp section
-            {
-                mergeSort(arr, m + 1, r);
-            }
-        }
+#pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
+        mergeSort(arr, l, m);
 
+#pragma omp task shared(arr) if ((r-l) > TASK_SIZE)
+        mergeSort(arr, m + 1, r);
+
+#pragma omp taskwait
         merge(arr, l, m, r);
     }
 }
@@ -134,7 +129,14 @@ int main() {
     fillArray(array, N, 1000);
 
     double startTime = omp_get_wtime();
-    mergeSort(array, 0, N-1);
+
+#pragma omp parallel
+    {
+#pragma omp single
+        mergeSort(array, 0, N-1);
+    }
+
+
     double endTime = omp_get_wtime();
 
     testMergesort();
