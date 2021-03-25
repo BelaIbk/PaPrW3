@@ -96,7 +96,8 @@ void sortCheck(int32_t arr[], uint size) {
     for (uint i = 1; i < size; i++) {
         if (arr[i-1] > arr[i]) {
             fprintf(stderr, "array is not sorted!");
-            return EXIT_FAILURE;
+            free(arr);
+            exit(1);
         }
     }
 }
