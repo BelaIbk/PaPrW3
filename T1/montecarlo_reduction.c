@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define N 50000000
+#define N 500000000
 
 double montecarlo(size_t n) {
 
