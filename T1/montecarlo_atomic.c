@@ -16,8 +16,8 @@ double montecarlo(size_t n) {
     
         #pragma omp for
         for (size_t i = 0; i < n; i++) {
-            double x = rand_r(&seed) / (double) RAND_MAX;
-            double y = rand_r(&seed) / (double) RAND_MAX;
+            float x = rand_r(&seed) / (float) RAND_MAX;
+            float y = rand_r(&seed) / (float) RAND_MAX;
             inner_sum+= (x * x + y * y <= 1);
         }
 

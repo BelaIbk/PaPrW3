@@ -1,4 +1,4 @@
-CFLAGS = -std=gnu11 -Wall -Wextra -lm -O0 -fopenmp 
+CFLAGS = -std=gnu11 -Wall -Wextra -lm -O3 -fopenmp 
 
 .PHONY: all
 all: mergesort_sequential mergesort_parallel

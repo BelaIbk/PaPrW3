@@ -6,8 +6,8 @@
 
 typedef unsigned int uint;
 
-//#define N 100000000
-  #define N 100
+#define N 100000000
+//  #define N 100
 
 #define TASK_SIZE 100
 
