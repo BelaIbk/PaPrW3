@@ -9,7 +9,7 @@ typedef unsigned int uint;
   #define N 100000000
 //#define N 100
 
-#define TASK_SIZE 100
+#define TASK_SIZE 500
 
 //----------------------------------
 // Merge sort functions from 
@@ -132,6 +132,8 @@ int main() {
     srand(42);
     int32_t *array = (int32_t *) malloc(N * sizeof(int32_t));
 
+    testMergesort();
+
     fillArray(array, N, 1000);
 
     double startTime = omp_get_wtime();
@@ -142,10 +144,7 @@ int main() {
         mergeSort(array, 0, N-1);
     }
 
-
     double endTime = omp_get_wtime();
-
-    testMergesort();
 
     printf("%2.3fs\n", endTime-startTime);
 

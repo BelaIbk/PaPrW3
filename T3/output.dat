@@ -6,3 +6,19 @@ Threads 1
 33.016s
 Threads 8
 11.910s
+  Loading gcc/8.2.0
+Sequential:
+25.066s
+Parallel:
+Threads 1
+31.771s
+Threads 8
+11.926s
+  Loading gcc/8.2.0
+Sequential:
+25.112s
+Parallel:
+Threads 1
+31.538s
+Threads 8
+11.353s

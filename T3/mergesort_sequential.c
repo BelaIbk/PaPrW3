@@ -126,6 +126,8 @@ void testMergesort() {
 int main() {
     int32_t *array = (int32_t *) malloc(N * sizeof(int32_t));
 
+    testMergesort();
+    
     fillArray(array, N, 1000);
 
     double startTime = omp_get_wtime();
