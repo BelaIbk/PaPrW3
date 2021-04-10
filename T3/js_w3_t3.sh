@@ -25,14 +25,13 @@ module load gcc/8.2.0
 # Set up any environment variables
 #export ENVIRONMENT_VARIABLE=foobar
 
-#/usr/bin/time -v OMP_NUM_THREADS=$THR ./montecarlo_critical
+echo "Sequential:"
+OMP_NUM_THREADS=1 ./mergesort_sequential
 
+echo "Parallel:"
 for THR in 1 8
 do
     echo "Threads $THR"
-    echo "Sequential:"
-    OMP_NUM_THREADS=$THR ./mergesort_sequential
-    echo "Parallel:"
     OMP_NUM_THREADS=$THR ./mergesort_parallel
 done
 

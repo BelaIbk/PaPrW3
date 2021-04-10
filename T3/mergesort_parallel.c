@@ -6,8 +6,8 @@
 
 typedef unsigned int uint;
 
-#define N 100000000
-//  #define N 100
+  #define N 100000000
+//#define N 100
 
 #define TASK_SIZE 100
 
@@ -108,8 +108,13 @@ void sortCheck(int32_t arr[], uint size) {
 
 
 void testMergesort() {
-    int32_t a1[] = {9,0,1,3,6,2,8,4,5,1};
+    int32_t *a1 = (int32_t *) malloc(10 * sizeof(int32_t));
     int32_t *a2 = (int32_t *) malloc(10 * sizeof(int32_t));
+
+    int32_t temp_arr[] = {9,0,1,3,6,2,8,4,5,1};
+    for (int i = 0; i < 10; i++) {
+        a1[i] = temp_arr[i];
+    }
 
     fillArray(a2, 10, 10);
 
@@ -143,8 +148,6 @@ int main() {
     testMergesort();
 
     printf("%2.3fs\n", endTime-startTime);
-
-    printArray(array, N);
 
     free(array);
 
