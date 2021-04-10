@@ -7,7 +7,6 @@
 
 double montecarlo(size_t n) {
 
-    
     size_t sum = 0;
 
     #pragma omp parallel
